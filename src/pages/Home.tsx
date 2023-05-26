@@ -1,10 +1,33 @@
-import { useSelector } from 'react-redux';
+import { Search } from '@mui/icons-material';
+import { InputAdornment, TextField, Typography } from '@mui/material';
 
 const Home = () => {
-  const counter = useSelector(
-    (state: { counter: { value: number } }) => state.counter
+  return (
+    <>
+      <header className="header">
+        <div className="container">
+          <Typography variant="h3" component="h1">
+            Blog
+          </Typography>
+        </div>
+        <div className="search">
+          <TextField
+            id="outlined-basic"
+            fullWidth
+            label="Search"
+            variant="filled"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Search />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </div>
+      </header>
+    </>
   );
-  return <div>Home {counter.value}</div>;
 };
 
 export default Home;
