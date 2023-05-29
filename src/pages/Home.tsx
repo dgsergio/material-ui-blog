@@ -1,31 +1,18 @@
-import { Search } from '@mui/icons-material';
-import { InputAdornment, TextField, Typography } from '@mui/material';
+import { Container } from '@mui/material';
+import Header from '../components/Header';
+import NavCategory from '../components/NavCategory';
+import PostsList from '../components/PostsList';
+import Footer from '../components/Footer';
 
 const Home = () => {
   return (
     <>
-      <header className="header">
-        <div className="container">
-          <Typography variant="h3" component="h1">
-            Blog
-          </Typography>
-        </div>
-        <div className="search">
-          <TextField
-            id="outlined-basic"
-            fullWidth
-            label="Search"
-            variant="filled"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Search />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </div>
-      </header>
+      <Header />
+      <Container maxWidth="lg">
+        <NavCategory />
+        <PostsList />
+      </Container>
+      <Footer />
     </>
   );
 };
