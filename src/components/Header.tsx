@@ -13,8 +13,7 @@ const Header = () => {
       <Typography variant="h3" component="h1">
         Blog
       </Typography>
-      <Divider />
-      <Container>
+      <Container maxWidth="md" className="search-field">
         <TextField
           id="outlined-basic"
           fullWidth
@@ -29,6 +28,7 @@ const Header = () => {
           }}
         />
       </Container>
+      <Divider />
     </header>
   );
 };

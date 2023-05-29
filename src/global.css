@@ -2,15 +2,61 @@ body {
   margin: 0;
 }
 
-.posts-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+/********** main header **********/
+.header h1 {
+  text-align: center;
+  padding: 1rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 2.5rem;
 }
 
+.search-field {
+  margin-bottom: 2rem;
+}
+
+/********** categories navegation **********/
+.categories {
+  margin: 1rem auto;
+  text-align: center;
+}
+
+/********** posts list **********/
+.posts-list {
+  display: grid;
+  margin: 1.5rem 2rem 5rem;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 3rem;
+  justify-items: center;
+}
+
+@media (min-width: 480px) {
+  .posts-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .posts-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/********** post **********/
+.post {
+  display: flex;
+  gap: 3rem;
+  margin: 2rem auto 5rem;
+}
+
+.post img {
+  max-width: 50%;
+}
+
+/********** main footer **********/
 .footer {
   background-color: #333;
   color: white;
   padding: 5rem;
-  margin-top: 2rem;
+  margin-top: 3rem;
 }
