@@ -6,12 +6,13 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
     <header className="header">
       <Typography variant="h3" component="h1">
-        Blog
+        <Link to="/">Blog</Link>
       </Typography>
       <Container maxWidth="md" className="search-field">
         <TextField
