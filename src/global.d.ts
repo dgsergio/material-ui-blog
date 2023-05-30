@@ -12,3 +12,7 @@ type PostType = {
   img: string;
   categories: string[];
 };
+
+type PostsState = {
+  posts: PostType[];
+};

@@ -12,8 +12,6 @@ const PostCard = ({ post }: { post: PostType }) => {
       ? post.body
       : post.body.split(' ', 20).join(' ') + '...';
 
-  console.log(post.title + ': ' + post.body.split(' ').length);
-
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia sx={{ height: 140 }} image={post.img} title={post.title} />
@@ -25,7 +23,7 @@ const PostCard = ({ post }: { post: PostType }) => {
           {shortenBody}
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions className="card-footer-btns">
         <Button size="small">
           <Link to={post.id}>Learn More</Link>
         </Button>

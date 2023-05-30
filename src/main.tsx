@@ -11,6 +11,7 @@ import './global.css';
 import Post from './pages/Post';
 import Root from './pages/Root';
 import Home from './pages/Home';
+import Editor from './pages/Editor';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: '/:postId',
         element: <Post />,
+      },
+      {
+        path: '/editor',
+        element: <Editor />,
       },
     ],
   },
