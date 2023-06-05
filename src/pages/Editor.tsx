@@ -53,6 +53,7 @@ const Editor = () => {
   const posts = useSelector((state: PostsState) => state.posts);
   const post = posts.find((post) => post.id === postId);
   const [personName, setPersonName] = useState<string[]>([]);
+  const [errorMsg, setErrorMsg] = useState<string>('');
 
   useEffect(() => {
     if (post) setPersonName([...post.categories]);
@@ -67,18 +68,25 @@ const Editor = () => {
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    //validate bejore sending data
-    //make a edit version of submit
     const postSelected: PostType = {
-      id: Date.now().toString(),
+      id: post?.id || Date.now().toString(),
       title: e.currentTarget.titlePost.value,
       body: e.currentTarget.body.value,
       img: e.currentTarget.imageUrl.value,
       categories: e.currentTarget.selectMultipleCategories.value.split(','),
     };
-    dispatch(addPost(postSelected));
-    navigate('/');
+
+    if (
+      postSelected.img.length < 1 ||
+      postSelected.title.length < 1 ||
+      postSelected.body.length < 1 ||
+      postSelected.categories.length < 1
+    )
+      setErrorMsg('All field are required');
+    else {
+      dispatch(addPost(postSelected));
+      navigate('/');
+    }
   };
 
   return (
@@ -125,7 +133,7 @@ const Editor = () => {
           rows={8}
           required
         />
-
+        {errorMsg && <div className="error">{errorMsg}</div>}
         <div className="form-footer">
           <FormControl sx={{ width: 240 }}>
             <InputLabel id="multipleCategorieslabel">Chip *</InputLabel>

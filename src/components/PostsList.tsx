@@ -1,9 +1,6 @@
 import PostCard from './PostCard';
-import { useSelector } from 'react-redux';
 
-const PostsList = () => {
-  const posts = useSelector((state: PostsState) => state.posts);
-
+const PostsList = ({ posts }: { posts: PostType[] }) => {
   return (
     <section className="posts-list">
       {posts.length > 0 &&

@@ -13,6 +13,31 @@ a {
   right: 3rem;
 }
 
+.error {
+  padding: 1rem 0;
+  background-color: #ffdde2;
+  color: #e44e4e;
+  border: 1px solid #ffa5a5;
+  font-family: sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%;
+  border-radius: 0.5rem;
+  animation: popup 250ms linear;
+}
+
+@keyframes popup {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 /********** main header **********/
 .header h1 {
   text-align: center;
@@ -58,6 +83,10 @@ a {
   justify-content: right;
 }
 
+.card {
+  width: 100%;
+}
+
 /********** post **********/
 .post {
   display: flex;
@@ -80,6 +109,13 @@ a {
   max-width: 100%;
 }
 
+p.post-categories {
+  color: #999;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
 @media (min-width: 768px) {
   .post img {
     max-width: 50%;
@@ -95,6 +131,11 @@ a {
 .post footer {
   display: flex;
   justify-content: space-between;
+}
+
+.post-footer-btns {
+  display: flex;
+  align-items: flex-start;
 }
 
 /********** main footer **********/

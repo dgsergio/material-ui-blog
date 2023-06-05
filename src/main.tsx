@@ -7,11 +7,11 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import './global.css';
+import './style.css';
 import Post from './pages/Post';
 import Root from './pages/Root';
-import Home from './pages/Home';
 import Editor from './pages/Editor';
+import Home from './pages/Home';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: '/editor/:postId',
         element: <Editor />,
+      },
+      {
+        path: '/category/:categoryId',
+        element: <Home />,
       },
     ],
   },

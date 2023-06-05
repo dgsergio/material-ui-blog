@@ -1,8 +1,16 @@
+type Categories =
+  | 'Review'
+  | 'Photoshop'
+  | 'Technology'
+  | 'Design'
+  | 'A.I.'
+  | 'Code';
+
 type PostTypeAPI = {
   id: number;
   title: string;
   body: string;
-  tags: string[];
+  tags: Categories[];
 };
 
 type PostType = {
@@ -10,7 +18,7 @@ type PostType = {
   title: string;
   body: string;
   img: string;
-  categories: string[];
+  categories: Categories[];
 };
 
 type PostsState = {

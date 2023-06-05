@@ -13,7 +13,7 @@ const PostCard = ({ post }: { post: PostType }) => {
       : post.body.split(' ', 20).join(' ') + '...';
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card className="card">
       <CardMedia sx={{ height: 140 }} image={post.img} title={post.title} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -25,7 +25,7 @@ const PostCard = ({ post }: { post: PostType }) => {
       </CardContent>
       <CardActions className="card-footer-btns">
         <Button size="small">
-          <Link to={post.id}>Learn More</Link>
+          <Link to={'/' + post.id}>Learn More</Link>
         </Button>
       </CardActions>
     </Card>
