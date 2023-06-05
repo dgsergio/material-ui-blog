@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ImageIcon from '@mui/icons-material/Image';
 import {
   Box,
@@ -15,8 +15,8 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import SendIcon from '@mui/icons-material/Send';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { addPost } from '../store';
 
 const ITEM_HEIGHT = 48;
@@ -32,20 +32,31 @@ const MenuProps = {
 
 const names = ['Review', 'Photoshop', 'Technology', 'Design', 'A.I.', 'Code'];
 
-function getStyles(name: string, personName: readonly string[], theme: Theme) {
+const getStyles = (
+  name: string,
+  personName: readonly string[],
+  theme: Theme
+) => {
   return {
     fontWeight:
       personName.indexOf(name) === -1
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
   };
-}
+};
 
 const Editor = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const theme = useTheme();
+  const { postId } = useParams();
+  const posts = useSelector((state: PostsState) => state.posts);
+  const post = posts.find((post) => post.id === postId);
   const [personName, setPersonName] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (post) setPersonName([...post.categories]);
+  }, []);
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
     const {
@@ -56,7 +67,9 @@ const Editor = () => {
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     //validate bejore sending data
+    //make a edit version of submit
     const postSelected: PostType = {
       id: Date.now().toString(),
       title: e.currentTarget.titlePost.value,
@@ -84,9 +97,11 @@ const Editor = () => {
           id="titlePost"
           label="Title"
           variant="standard"
+          defaultValue={post?.title}
           required
         />
         <TextField
+          defaultValue={post?.img}
           fullWidth
           required
           id="imageUrl"
@@ -102,6 +117,7 @@ const Editor = () => {
           variant="standard"
         />
         <TextField
+          defaultValue={post?.body}
           fullWidth
           id="body"
           label="Body"
@@ -131,6 +147,7 @@ const Editor = () => {
                   ))}
                 </Box>
               )}
+              defaultValue={post?.categories}
               MenuProps={MenuProps}
             >
               {names.map((name) => (

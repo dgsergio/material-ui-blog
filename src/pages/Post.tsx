@@ -1,6 +1,7 @@
 import { Button, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import EditorIcon from '../components/EditorIcon';
 
 const Post = () => {
   const { postId } = useParams();
@@ -10,32 +11,29 @@ const Post = () => {
   if (!post) throw new Error('The post does not exist');
 
   return (
-    <article className="post">
-      <img
-        src={
-          post.img ||
-          'https://www.sciencenews.org/wp-content/uploads/2021/02/022421_mt_number-generator_feat.jpg'
-        }
-        alt={post.title}
-      />
-      <div className="post-text">
-        <div>
-          <Typography variant="h4" component="h2">
-            {post.title}
-          </Typography>
+    <>
+      <article className="post">
+        <img src={post.img} alt={post.title} />
+        <div className="post-text">
+          <div>
+            <Typography variant="h4" component="h2">
+              {post.title}
+            </Typography>
 
-          <Typography component="p">{post.body}</Typography>
+            <Typography component="p">{post.body}</Typography>
+          </div>
+          <footer>
+            <Typography component="p" fontStyle="italic">
+              {post.categories.join(', ')}
+            </Typography>
+            <Button size="small">
+              <Link to="/">&#x21D0; Back</Link>
+            </Button>
+          </footer>
         </div>
-        <footer>
-          <Typography component="p" fontStyle="italic">
-            {post.categories.join(', ')}
-          </Typography>
-          <Button size="small">
-            <Link to="/">&#x21D0; Back</Link>
-          </Button>
-        </footer>
-      </div>
-    </article>
+      </article>
+      <EditorIcon add={false} id={post.id} />
+    </>
   );
 };
 

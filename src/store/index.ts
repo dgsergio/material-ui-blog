@@ -9,7 +9,7 @@ const transformData = (data: PostTypeAPI[]): PostType[] => {
       title: item.title,
       body: item.body,
       categories: [...item.tags],
-      img: 'https://www.sciencenews.org/wp-content/uploads/2021/02/022421_mt_number-generator_feat.jpg',
+      img: 'img/no-image.jpg',
     });
   }
   return newData;

@@ -30,6 +30,10 @@ const router = createBrowserRouter([
         path: '/editor',
         element: <Editor />,
       },
+      {
+        path: '/editor/:postId',
+        element: <Editor />,
+      },
     ],
   },
 ]);
