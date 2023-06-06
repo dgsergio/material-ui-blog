@@ -17,7 +17,7 @@ import Chip from '@mui/material/Chip';
 import SendIcon from '@mui/icons-material/Send';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPost } from '../store';
+import { AppDispatch, sendPost } from '../store';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -46,7 +46,7 @@ const getStyles = (
 };
 
 const Editor = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const theme = useTheme();
   const { postId } = useParams();
@@ -83,7 +83,7 @@ const Editor = () => {
     )
       setErrorMsg('All field are required');
     else {
-      dispatch(addPost(postSelected));
+      dispatch(sendPost(postSelected));
       navigate('/');
     }
   };

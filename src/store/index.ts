@@ -1,4 +1,9 @@
-import { createSlice, configureStore, PayloadAction } from '@reduxjs/toolkit';
+import {
+  createSlice,
+  configureStore,
+  PayloadAction,
+  Dispatch,
+} from '@reduxjs/toolkit';
 import DUMMMY from '../mocks/posts.json';
 
 const transformData = (data: PostTypeAPI[]): PostType[] => {
@@ -55,9 +60,29 @@ const postsSlice = createSlice({
   },
 });
 
+export const sendPost = (post: PostType) => {
+  return async (dispatch: Dispatch) => {
+    const { id, ...postNoId } = post;
+    const response = await fetch(
+      import.meta.env.VITE_FIREBASE_URL + 'posts.json',
+      {
+        method: 'POST',
+        body: JSON.stringify(postNoId),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    const data = await response.json();
+    dispatch(addPost({ id: data.name, ...postNoId }));
+  };
+};
+
 export const { populate, addPost, delPost, searchPosts, resetSearch } =
   postsSlice.actions;
 
 export const store = configureStore({
   reducer: postsSlice.reducer,
 });
+
+export type AppDispatch = typeof store.dispatch;
