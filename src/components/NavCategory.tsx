@@ -45,6 +45,9 @@ const NavCategory = () => {
             variant={categoryName === category ? 'contained' : 'text'}
             key={category}
             onClick={() => navigateHandlder(category)}
+            title={
+              categoryName === category ? 'click again to unselect it' : ''
+            }
           >
             {category}
           </Button>
