@@ -23,4 +23,5 @@ type PostType = {
 
 type PostsState = {
   posts: PostType[];
+  searchedPosts: PostType[] | undefined;
 };

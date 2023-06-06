@@ -75,12 +75,11 @@ const Editor = () => {
       img: e.currentTarget.imageUrl.value,
       categories: e.currentTarget.selectMultipleCategories.value.split(','),
     };
-
     if (
       postSelected.img.length < 1 ||
       postSelected.title.length < 1 ||
       postSelected.body.length < 1 ||
-      postSelected.categories.length < 1
+      e.currentTarget.selectMultipleCategories.value.length < 1
     )
       setErrorMsg('All field are required');
     else {
@@ -133,7 +132,7 @@ const Editor = () => {
           rows={8}
           required
         />
-        {errorMsg && <div className="error">{errorMsg}</div>}
+        {errorMsg && <div className="message error">{errorMsg}</div>}
         <div className="form-footer">
           <FormControl sx={{ width: 240 }}>
             <InputLabel id="multipleCategorieslabel">Chip *</InputLabel>

@@ -13,16 +13,12 @@ a {
   right: 3rem;
 }
 
-.error {
+.message {
   padding: 1rem 0;
-  background-color: #ffdde2;
-  color: #e44e4e;
-  border: 1px solid #ffa5a5;
   font-family: sans-serif;
   text-align: center;
   text-transform: uppercase;
   width: 100%;
-  border-radius: 0.5rem;
   animation: popup 250ms linear;
 }
 
@@ -36,6 +32,14 @@ a {
   100% {
     transform: scale(1);
   }
+}
+
+.error {
+  border-radius: 0.5rem;
+  padding: 1rem 0;
+  background-color: #ffdde2;
+  color: #e44e4e;
+  border: 1px solid #ffa5a5;
 }
 
 /********** main header **********/
@@ -135,7 +139,8 @@ p.post-categories {
 
 .post-footer-btns {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  gap: 1rem;
 }
 
 /********** main footer **********/

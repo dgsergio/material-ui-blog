@@ -17,6 +17,7 @@ const transformData = (data: PostTypeAPI[]): PostType[] => {
 
 const initialState: PostsState = {
   posts: transformData(DUMMMY.posts as PostTypeAPI[]),
+  searchedPosts: undefined,
 };
 
 const postsSlice = createSlice({
@@ -39,10 +40,23 @@ const postsSlice = createSlice({
     delPost(state, action: PayloadAction<string>) {
       state.posts = state.posts.filter((post) => post.id !== action.payload);
     },
+    searchPosts(state, action: PayloadAction<string>) {
+      if (action.payload === '') {
+        state.searchedPosts = undefined;
+      } else {
+        state.searchedPosts = state.posts.filter((post) =>
+          post.title.toLowerCase().includes(action.payload)
+        );
+      }
+    },
+    resetSearch(state) {
+      state.searchedPosts = undefined;
+    },
   },
 });
 
-export const { populate, addPost, delPost } = postsSlice.actions;
+export const { populate, addPost, delPost, searchPosts, resetSearch } =
+  postsSlice.actions;
 
 export const store = configureStore({
   reducer: postsSlice.reducer,

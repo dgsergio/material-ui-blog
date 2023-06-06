@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 const Home = () => {
   const { categoryId } = useParams();
   const posts = useSelector((state: PostsState) => state.posts);
+  const searchedPosts = useSelector((state: PostsState) => state.searchedPosts);
 
   let postsFiltered: PostType[] = [];
   if (categoryId) {
@@ -19,11 +20,19 @@ const Home = () => {
     );
     if (postsFiltered.length < 1) throw new Error('The post does not exist');
   }
-
   return (
     <>
-      <NavCategory />
-      <PostsList posts={postsFiltered.length > 0 ? postsFiltered : posts} />
+      {searchedPosts && searchedPosts.length < 1 && (
+        <div className="message">No posts were found</div>
+      )}
+      {searchedPosts ? (
+        <PostsList posts={searchedPosts} />
+      ) : (
+        <>
+          <NavCategory />
+          <PostsList posts={postsFiltered.length > 0 ? postsFiltered : posts} />
+        </>
+      )}
       <EditorIcon add={true} />
     </>
   );

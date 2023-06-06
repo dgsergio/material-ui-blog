@@ -47,7 +47,7 @@ const Post = () => {
               </Button>
               <IconButton
                 aria-label="delete"
-                size="small"
+                size="large"
                 color="secondary"
                 onClick={deleteHandler}
               >
