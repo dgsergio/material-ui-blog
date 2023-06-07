@@ -8,8 +8,8 @@ const Home = () => {
   const { categoryId } = useParams();
   const posts = useSelector((state: PostsState) => state.posts);
   const searchedPosts = useSelector((state: PostsState) => state.searchedPosts);
-
   let postsFiltered: PostType[] = [];
+
   if (categoryId) {
     let query =
       categoryId === 'artificial-intelligence'
@@ -20,6 +20,7 @@ const Home = () => {
     );
     if (postsFiltered.length < 1) throw new Error('The post does not exist');
   }
+
   return (
     <>
       {searchedPosts && searchedPosts.length < 1 && (

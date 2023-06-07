@@ -14,7 +14,9 @@
 - [x] On click search area backspace button clear the input field (controlled value with useState)
 - [ ] Fix responsive deseign
 - [ ] Connect to a database
+  - [x] Manage Error
   - [x] Create
-  - [ ] R
+  - [x] R
   - [ ] U
   - [ ] Delete
+- [ ] Add user authentication

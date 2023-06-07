@@ -7,10 +7,12 @@ type Categories =
   | 'Code';
 
 type PostTypeAPI = {
-  id: number;
-  title: string;
-  body: string;
-  tags: Categories[];
+  [key: string]: {
+    title: string;
+    body: string;
+    img: string;
+    categories: Categories[];
+  };
 };
 
 type PostType = {
@@ -21,7 +23,13 @@ type PostType = {
   categories: Categories[];
 };
 
+type Status = {
+  loading: boolean;
+  error: string;
+};
+
 type PostsState = {
   posts: PostType[];
   searchedPosts: PostType[] | undefined;
+  status: Status;
 };

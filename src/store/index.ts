@@ -4,25 +4,11 @@ import {
   PayloadAction,
   Dispatch,
 } from '@reduxjs/toolkit';
-import DUMMMY from '../mocks/posts.json';
-
-const transformData = (data: PostTypeAPI[]): PostType[] => {
-  let newData: PostType[] = [];
-  for (const item of data) {
-    newData.push({
-      id: 'p' + item.id,
-      title: item.title,
-      body: item.body,
-      categories: [...item.tags],
-      img: '/img/no-image.jpg',
-    });
-  }
-  return newData;
-};
 
 const initialState: PostsState = {
-  posts: transformData(DUMMMY.posts as PostTypeAPI[]),
+  posts: [],
   searchedPosts: undefined,
+  status: { loading: false, error: '' },
 };
 
 const postsSlice = createSlice({
@@ -57,32 +43,75 @@ const postsSlice = createSlice({
     resetSearch(state) {
       state.searchedPosts = undefined;
     },
+    changeStatus(state, action: PayloadAction<Status>) {
+      state.status = action.payload;
+    },
   },
+});
+
+export const {
+  populate,
+  addPost,
+  delPost,
+  searchPosts,
+  resetSearch,
+  changeStatus,
+} = postsSlice.actions;
+
+export const store = configureStore({
+  reducer: postsSlice.reducer,
 });
 
 export const sendPost = (post: PostType) => {
   return async (dispatch: Dispatch) => {
     const { id, ...postNoId } = post;
-    const response = await fetch(
-      import.meta.env.VITE_FIREBASE_URL + 'posts.json',
-      {
-        method: 'POST',
-        body: JSON.stringify(postNoId),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-    const data = await response.json();
-    dispatch(addPost({ id: data.name, ...postNoId }));
+    try {
+      dispatch(changeStatus({ loading: true, error: '' }));
+      const response = await fetch(
+        import.meta.env.VITE_FIREBASE_URL + 'posts.json',
+        {
+          method: 'POST',
+          body: JSON.stringify(postNoId),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      if (!response.ok) throw new Error('Something went wrong');
+      const data = await response.json();
+      dispatch(addPost({ id: data.name, ...postNoId }));
+      dispatch(changeStatus({ loading: false, error: '' }));
+    } catch (err: any) {
+      dispatch(
+        changeStatus({
+          loading: false,
+          error: 'Error sending post: ' + err.message,
+        })
+      );
+    }
   };
 };
 
-export const { populate, addPost, delPost, searchPosts, resetSearch } =
-  postsSlice.actions;
-
-export const store = configureStore({
-  reducer: postsSlice.reducer,
-});
+export const getPosts = (
+  transformData: (data: PostTypeAPI) => Promise<PostType[]>
+) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(changeStatus({ loading: true, error: '' }));
+      const response = await fetch(
+        import.meta.env.VITE_FIREBASE_URL + 'posts.json'
+      );
+      if (!response.ok) throw new Error('Something went wrong');
+      const data = await response.json();
+      const posts = await transformData(data);
+      dispatch(changeStatus({ loading: false, error: '' }));
+      dispatch(populate(posts));
+    } catch (err: any) {
+      dispatch(
+        changeStatus({ loading: false, error: 'Fail to fetch: ' + err.message })
+      );
+    }
+  };
+};
 
 export type AppDispatch = typeof store.dispatch;
