@@ -62,36 +62,6 @@ export const store = configureStore({
   reducer: postsSlice.reducer,
 });
 
-export const sendPost = (post: PostType) => {
-  return async (dispatch: Dispatch) => {
-    const { id, ...postNoId } = post;
-    try {
-      dispatch(changeStatus({ loading: true, error: '' }));
-      const response = await fetch(
-        import.meta.env.VITE_FIREBASE_URL + 'posts.json',
-        {
-          method: 'POST',
-          body: JSON.stringify(postNoId),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      if (!response.ok) throw new Error('Something went wrong');
-      const data = await response.json();
-      dispatch(addPost({ id: data.name, ...postNoId }));
-      dispatch(changeStatus({ loading: false, error: '' }));
-    } catch (err: any) {
-      dispatch(
-        changeStatus({
-          loading: false,
-          error: 'Error sending post: ' + err.message,
-        })
-      );
-    }
-  };
-};
-
 export const getPosts = (
   transformData: (data: PostTypeAPI) => Promise<PostType[]>
 ) => {
@@ -109,6 +79,59 @@ export const getPosts = (
     } catch (err: any) {
       dispatch(
         changeStatus({ loading: false, error: 'Fail to fetch: ' + err.message })
+      );
+    }
+  };
+};
+
+export const sendPost = (post: PostType, reqMethod: 'POST' | 'PATCH') => {
+  return async (dispatch: Dispatch) => {
+    const { id, ...postNoId } = post;
+    const endURL = id === '' ? 'posts.json' : `posts/${id}.json`;
+    try {
+      dispatch(changeStatus({ loading: true, error: '' }));
+      const response = await fetch(import.meta.env.VITE_FIREBASE_URL + endURL, {
+        method: reqMethod,
+        body: JSON.stringify(postNoId),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) throw new Error('Something went wrong');
+      const data = await response.json();
+      if (!id) dispatch(addPost({ id: data.name, ...postNoId }));
+      else dispatch(addPost(post));
+      dispatch(changeStatus({ loading: false, error: '' }));
+    } catch (err: any) {
+      dispatch(
+        changeStatus({
+          loading: false,
+          error: 'Error sending post: ' + err.message,
+        })
+      );
+    }
+  };
+};
+
+export const deletePost = (id: string) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(changeStatus({ loading: true, error: '' }));
+      const response = await fetch(
+        import.meta.env.VITE_FIREBASE_URL + `posts/${id}.json`,
+        {
+          method: 'DELETE',
+        }
+      );
+      if (!response.ok) throw new Error('Something went wrong');
+      dispatch(delPost(id));
+      dispatch(changeStatus({ loading: false, error: '' }));
+    } catch (err: any) {
+      dispatch(
+        changeStatus({
+          loading: false,
+          error: 'Error deleting post: ' + err.message,
+        })
       );
     }
   };

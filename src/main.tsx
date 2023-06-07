@@ -12,30 +12,32 @@ import Post from './pages/Post';
 import Root from './pages/Root';
 import Editor from './pages/Editor';
 import Home from './pages/Home';
+import ErrorPage from './pages/Error';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
         element: <Home />,
       },
       {
-        path: '/:postId',
+        path: ':postId',
         element: <Post />,
       },
       {
-        path: '/editor',
+        path: 'editor',
         element: <Editor />,
       },
       {
-        path: '/editor/:postId',
+        path: 'editor/:postId',
         element: <Editor />,
       },
       {
-        path: '/category/:categoryId',
+        path: 'category/:categoryId',
         element: <Home />,
       },
     ],

@@ -28,7 +28,6 @@ function Root() {
       firstTime = false;
       return;
     }
-    console.log('eff');
     dispatch(getPosts(transformData));
   }, []);
 

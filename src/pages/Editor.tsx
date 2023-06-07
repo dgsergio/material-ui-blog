@@ -46,14 +46,15 @@ const getStyles = (
 };
 
 const Editor = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
   const theme = useTheme();
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+  const [personName, setPersonName] = useState<string[]>([]);
+  const [errorMsg, setErrorMsg] = useState<string>('');
+
   const { postId } = useParams();
   const posts = useSelector((state: PostsState) => state.posts);
   const post = posts.find((post) => post.id === postId);
-  const [personName, setPersonName] = useState<string[]>([]);
-  const [errorMsg, setErrorMsg] = useState<string>('');
 
   useEffect(() => {
     if (post) setPersonName([...post.categories]);
@@ -69,7 +70,7 @@ const Editor = () => {
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const postSelected: PostType = {
-      id: post?.id || Date.now().toString(),
+      id: post?.id || '',
       title: e.currentTarget.titlePost.value,
       body: e.currentTarget.body.value,
       img: e.currentTarget.imageUrl.value,
@@ -83,7 +84,11 @@ const Editor = () => {
     )
       setErrorMsg('All field are required');
     else {
-      dispatch(sendPost(postSelected));
+      if (postId) {
+        dispatch(sendPost(postSelected, 'PATCH'));
+      } else {
+        dispatch(sendPost(postSelected, 'POST'));
+      }
       navigate('/');
     }
   };

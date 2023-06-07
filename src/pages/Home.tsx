@@ -18,23 +18,30 @@ const Home = () => {
     postsFiltered = posts.filter((post) =>
       post.categories.includes(query as Categories)
     );
-    if (postsFiltered.length < 1) throw new Error('The post does not exist');
   }
 
   return (
     <>
-      {searchedPosts && searchedPosts.length < 1 && (
-        <div className="message">No posts were found</div>
-      )}
-      {searchedPosts ? (
-        <PostsList posts={searchedPosts} />
+      {categoryId && postsFiltered.length < 1 ? (
+        <div className="status-message">Page not found</div>
       ) : (
         <>
-          <NavCategory />
-          <PostsList posts={postsFiltered.length > 0 ? postsFiltered : posts} />
+          {searchedPosts && searchedPosts.length < 1 && (
+            <div className="message">No posts were found</div>
+          )}
+          {searchedPosts ? (
+            <PostsList posts={searchedPosts} />
+          ) : (
+            <>
+              <NavCategory />
+              <PostsList
+                posts={postsFiltered.length > 0 ? postsFiltered : posts}
+              />
+            </>
+          )}
+          <EditorIcon add={true} />
         </>
       )}
-      <EditorIcon add={true} />
     </>
   );
 };
