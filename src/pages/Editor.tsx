@@ -69,16 +69,20 @@ const Editor = () => {
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const postDate = new Date().toString().slice(0, 15).split(' ');
     const postSelected: PostType = {
       id: post?.id || '',
       title: e.currentTarget.titlePost.value,
       body: e.currentTarget.body.value,
       img: e.currentTarget.imageUrl.value,
+      date: post?.date || `${postDate[1]} ${postDate[2]}, ${postDate[3]}`,
+      author: e.currentTarget.author.value,
       categories: e.currentTarget.selectMultipleCategories.value.split(','),
     };
     if (
       postSelected.img.length < 1 ||
       postSelected.title.length < 1 ||
+      postSelected.author.length < 1 ||
       postSelected.body.length < 1 ||
       e.currentTarget.selectMultipleCategories.value.length < 1
     )
@@ -96,11 +100,9 @@ const Editor = () => {
   return (
     <Container maxWidth="sm">
       <Box
+        className="editor-form"
         onSubmit={submitHandler}
         component="form"
-        sx={{
-          '& > :not(style)': { m: 3 },
-        }}
         noValidate
         autoComplete="off"
       >
@@ -110,6 +112,14 @@ const Editor = () => {
           label="Title"
           variant="standard"
           defaultValue={post?.title}
+          required
+        />
+        <TextField
+          fullWidth
+          id="author"
+          label="Author"
+          variant="standard"
+          defaultValue={post?.author}
           required
         />
         <TextField

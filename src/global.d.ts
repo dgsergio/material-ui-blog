@@ -11,6 +11,8 @@ type PostTypeAPI = {
     title: string;
     body: string;
     img: string;
+    author: string;
+    date: string;
     categories: Categories[];
   };
 };
@@ -20,6 +22,8 @@ type PostType = {
   title: string;
   body: string;
   img: string;
+  author: string;
+  date: string;
   categories: Categories[];
 };
 

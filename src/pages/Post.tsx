@@ -1,4 +1,4 @@
-import { Button, Typography } from '@mui/material';
+import { Button, Divider, Typography } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useSelector, useDispatch } from 'react-redux';
@@ -25,37 +25,50 @@ const Post = () => {
       ) : (
         <>
           <article className="post">
-            <img src={post.img} alt={post.title} />
-            <div className="post-text">
-              <div>
-                <Typography variant="h4" component="h2">
-                  {post.title}
-                </Typography>
-
-                <Typography component="p">{post.body}</Typography>
-              </div>
-              <footer>
-                <Typography
-                  component="p"
-                  fontStyle="italic"
-                  className="post-categories"
-                >
-                  {post.categories.join(', ')}
-                </Typography>
-                <div className="post-footer-btns">
-                  <Button size="small">
-                    <Link to="/">&#x21D0; Back</Link>
-                  </Button>
-                  <IconButton
-                    aria-label="delete"
-                    size="large"
-                    color="secondary"
-                    onClick={deleteHandler}
+            <Typography variant="h4" component="h2">
+              {post.title}
+            </Typography>
+            <div className="post-container">
+              <img src={post.img} alt={post.title} />
+              <div className="post-text">
+                <div>
+                  <Typography component="p" className="post-body">
+                    {post.body}
+                  </Typography>
+                  <Typography
+                    component="p"
+                    className="post-info"
+                    fontStyle="italic"
+                    color="text.secondary"
                   >
-                    <DeleteIcon fontSize="inherit" />
-                  </IconButton>
+                    By {post.author} ({post.date})
+                  </Typography>
                 </div>
-              </footer>
+                <Divider />
+                <footer>
+                  <Typography
+                    component="p"
+                    fontStyle="italic"
+                    className="post-categories"
+                    color="text.secondary"
+                  >
+                    {post.categories.join(', ')}
+                  </Typography>
+                  <div className="post-footer-btns">
+                    <Button size="small">
+                      <Link to="/">&#x21D0; Back</Link>
+                    </Button>
+                    <IconButton
+                      aria-label="delete"
+                      size="large"
+                      color="secondary"
+                      onClick={deleteHandler}
+                    >
+                      <DeleteIcon fontSize="inherit" />
+                    </IconButton>
+                  </div>
+                </footer>
+              </div>
             </div>
           </article>
           <EditorIcon add={false} id={post.id} />

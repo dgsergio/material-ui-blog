@@ -16,6 +16,14 @@ const PostCard = ({ post }: { post: PostType }) => {
     <Card className="card">
       <CardMedia sx={{ height: 140 }} image={post.img} title={post.title} />
       <CardContent>
+        <Typography
+          className="card-info"
+          component="p"
+          fontStyle={'italic'}
+          color="text.secondary"
+        >
+          {post.author} ({post.date})
+        </Typography>
         <Typography gutterBottom variant="h5" component="div">
           {post.title}
         </Typography>
@@ -24,6 +32,14 @@ const PostCard = ({ post }: { post: PostType }) => {
         </Typography>
       </CardContent>
       <CardActions className="card-footer-btns">
+        <Typography
+          className="card-categories"
+          component="p"
+          fontStyle={'italic'}
+          color="text.secondary"
+        >
+          {post.categories.join(', ')}
+        </Typography>
         <Button size="small">
           <Link to={'/' + post.id}>Learn More</Link>
         </Button>

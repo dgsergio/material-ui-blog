@@ -74,6 +74,12 @@ a {
   text-align: center;
 }
 
+.categories-btns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 /********** posts list **********/
 .posts-list {
   display: grid;
@@ -97,46 +103,65 @@ a {
 
 /********** post card list **********/
 .card-footer-btns {
-  justify-content: right;
+  flex-direction: column;
 }
 
 .card {
   width: 100%;
 }
 
+p.card-info {
+  font-size: 0.8rem;
+}
+
+p.card-categories {
+  font-size: 0.8rem;
+  text-align: center;
+}
+
 /********** post **********/
 .post {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
   margin: 2rem auto 5rem;
 }
 
+.post-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 @media (min-width: 768px) {
-  .post {
-    flex-direction: row;
+  .post-container {
+    display: grid;
+    grid-template-columns: 3fr 4fr;
   }
 }
 
 .post h2 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.8rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.92rem;
 }
 
 .post img {
-  max-width: 100%;
+  width: 100%;
+}
+
+p.post-info {
+  font-size: 0.9rem;
+  margin: 0.5rem auto 1rem;
+  text-align: right;
 }
 
 p.post-categories {
-  color: #999;
   font-size: 0.9rem;
   display: flex;
   align-items: center;
 }
 
-@media (min-width: 768px) {
-  .post img {
-    max-width: 50%;
-  }
+p.post-body {
+  line-height: 1.7rem;
 }
 
 .post-text {
@@ -181,11 +206,27 @@ a.footer-home {
 }
 
 /********** editor post page **********/
+.editor-form {
+  margin: 2rem auto;
+}
+
+.editor-form > :not(style) {
+  margin: 1.2rem 0 !important;
+}
+
 .form-footer {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
+  gap: 2.5rem;
+}
+
+@media (min-width: 480px) {
+  .form-footer {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 
 .form-footer-buttons {

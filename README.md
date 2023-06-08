@@ -11,13 +11,15 @@
 
 - Commits with: feat, fix, docs, chore, test, style, refactor
 - Dummy posts: https://dummyjson.com/posts
-- [x] On click search area backspace button clear the input field (controlled value with useState)
-- [x] Connect to a database
-  - [x] Manage Error
-  - [x] Create
-  - [x] R
-  - [x] U
-  - [x] Delete
-- [ ] Fix responsive UI
-- [ ] Fix post page img UI
+- On click search area backspace button clear the input field (controlled value with useState)
+- Connect to a database
+  - Manage Error
+  - Create
+  - R
+  - U
+  - Delete
+- Fix post page img UI
+- Fix responsive UI
+- Add author and date
 - [ ] Add user authentication
+  - [ ] Set firebase.ts configuration

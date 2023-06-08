@@ -36,6 +36,7 @@ const NavCategory = () => {
   return (
     <div className="categories">
       <ButtonGroup
+        className="categories-btns"
         variant="text"
         aria-label="outlined primary button group"
         size="small"
