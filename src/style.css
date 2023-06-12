@@ -101,6 +101,15 @@ a {
   }
 }
 
+/********** topbar **********/
+.topbar-container {
+  justify-content: end;
+}
+
+.topbar-profile-image {
+  width: 100%;
+}
+
 /********** post card list **********/
 .card-footer-btns {
   flex-direction: column;

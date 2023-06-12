@@ -22,4 +22,11 @@
 - Fix responsive UI
 - Add author and date
 - [ ] Add user authentication
-  - [ ] Set firebase.ts configuration
+  - [x] Set firebase.ts configuration
+  - [ ] Sign up
+    - [ ] Handle error
+  - [ ] Log in / out
+    - [ ] On Login allows create and edit post
+    - [ ] On Login disable create and edit post
+    - [ ] Handle error
+    - [ ] New Post auto fill author field (disabled for changes)

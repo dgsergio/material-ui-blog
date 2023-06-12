@@ -37,3 +37,10 @@ type PostsState = {
   searchedPosts: PostType[] | undefined;
   status: Status;
 };
+
+type GoogleApi = {
+  displayName: string;
+  email: string;
+  photoURL: string;
+  uid: string;
+};
