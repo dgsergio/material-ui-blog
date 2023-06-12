@@ -1,7 +1,7 @@
 import { Search } from '@mui/icons-material';
 import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined';
 import { Container, InputAdornment, TextField } from '@mui/material';
-import { resetSearch, searchPosts } from '../store';
+import { resetSearch, searchPosts } from '../store/postsSlice';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,7 +9,9 @@ const SearchInput = () => {
   const dispatch = useDispatch();
 
   const [searchValue, setSearchValue] = useState<string>('');
-  const searchedPosts = useSelector((state: PostsState) => state.searchedPosts);
+  const searchedPosts = useSelector(
+    (state: { posts: PostsState }) => state.posts.searchedPosts
+  );
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value.toLowerCase();

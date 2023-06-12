@@ -4,12 +4,15 @@ import Footer from '../components/Footer';
 import { Container } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, getPosts } from '../store';
+import { AppDispatch } from '../store';
+import { getPosts } from '../store/postsSlice';
 let firstTime = true;
 
 function Root() {
   const dispatch: AppDispatch = useDispatch();
-  const { loading, error } = useSelector((state: PostsState) => state.status);
+  const { loading, error } = useSelector(
+    (state: { posts: PostsState }) => state.posts.status
+  );
 
   const transformData = async (data: PostTypeAPI) => {
     const thedata = await data;

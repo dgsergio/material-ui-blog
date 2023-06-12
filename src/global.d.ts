@@ -38,6 +38,18 @@ type PostsState = {
   status: Status;
 };
 
+type UserType = {
+  id: string;
+  name: string | null;
+  email: string | null;
+  imgUrl: string | null;
+};
+
+type AuthState = {
+  user: UserType | undefined;
+  status: Status;
+};
+
 type GoogleApi = {
   displayName: string;
   email: string;

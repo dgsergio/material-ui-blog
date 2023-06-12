@@ -17,7 +17,8 @@ import Chip from '@mui/material/Chip';
 import SendIcon from '@mui/icons-material/Send';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, sendPost } from '../store';
+import { AppDispatch } from '../store';
+import { sendPost } from '../store/postsSlice';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -53,7 +54,9 @@ const Editor = () => {
   const [errorMsg, setErrorMsg] = useState<string>('');
 
   const { postId } = useParams();
-  const posts = useSelector((state: PostsState) => state.posts);
+  const posts = useSelector(
+    (state: { posts: PostsState }) => state.posts.posts
+  );
   const post = posts.find((post) => post.id === postId);
 
   useEffect(() => {

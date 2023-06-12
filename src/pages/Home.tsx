@@ -6,8 +6,15 @@ import { useSelector } from 'react-redux';
 
 const Home = () => {
   const { categoryId } = useParams();
-  const posts = useSelector((state: PostsState) => state.posts);
-  const searchedPosts = useSelector((state: PostsState) => state.searchedPosts);
+  const userState = useSelector(
+    (state: { auth: AuthState }) => state.auth.user
+  );
+  const posts = useSelector(
+    (state: { posts: PostsState }) => state.posts.posts
+  );
+  const searchedPosts = useSelector(
+    (state: { posts: PostsState }) => state.posts.searchedPosts
+  );
   let postsFiltered: PostType[] = [];
 
   if (categoryId) {
@@ -39,7 +46,8 @@ const Home = () => {
               />
             </>
           )}
-          <EditorIcon add={true} />
+
+          {userState && <EditorIcon add={true} />}
         </>
       )}
     </>

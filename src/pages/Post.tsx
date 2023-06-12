@@ -4,11 +4,17 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import EditorIcon from '../components/EditorIcon';
-import { AppDispatch, deletePost } from '../store';
+import { AppDispatch } from '../store';
+import { deletePost } from '../store/postsSlice';
 
 const Post = () => {
   const { postId } = useParams();
-  const posts = useSelector((state: PostsState) => state.posts);
+  const userState = useSelector(
+    (state: { auth: AuthState }) => state.auth.user
+  );
+  const posts = useSelector(
+    (state: { posts: PostsState }) => state.posts.posts
+  );
   const post = posts.find((post) => post.id === postId);
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
@@ -58,20 +64,22 @@ const Post = () => {
                     <Button size="small">
                       <Link to="/">&#x21D0; Back</Link>
                     </Button>
-                    <IconButton
-                      aria-label="delete"
-                      size="large"
-                      color="secondary"
-                      onClick={deleteHandler}
-                    >
-                      <DeleteIcon fontSize="inherit" />
-                    </IconButton>
+                    {userState && (
+                      <IconButton
+                        aria-label="delete"
+                        size="large"
+                        color="secondary"
+                        onClick={deleteHandler}
+                      >
+                        <DeleteIcon fontSize="inherit" />
+                      </IconButton>
+                    )}
                   </div>
                 </footer>
               </div>
             </div>
           </article>
-          <EditorIcon add={false} id={post.id} />
+          {userState && <EditorIcon add={false} id={post.id} />}
         </>
       )}
     </>

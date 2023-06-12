@@ -3,7 +3,9 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const NavCategory = () => {
-  const posts = useSelector((state: PostsState) => state.posts);
+  const posts = useSelector(
+    (state: { posts: PostsState }) => state.posts.posts
+  );
   const navigate = useNavigate();
   const { categoryId } = useParams();
   let categoryName = '';
