@@ -47,7 +47,7 @@ const Post = () => {
                     fontStyle="italic"
                     color="text.secondary"
                   >
-                    By {post.author} ({post.date})
+                    By {post.author.name} ({post.date})
                   </Typography>
                 </div>
                 <Divider />

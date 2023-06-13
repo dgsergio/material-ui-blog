@@ -22,12 +22,13 @@
 - Fix responsive UI
 - Add author and date
 - [ ] Add user authentication
-  - [x] Set firebase.ts configuration
-  - [x] Sign up
-    - [x] Handle error
-  - [x] Log in / out
-    - [x] Handle error
-    - [x] On Login allows create and edit post
-    - [x] On Login disable create and edit post
-  - [ ] New Post auto fill author field (disabled for changes)
+  - Set firebase.ts configuration
+  - Sign up
+    - Handle error
+  - Log in / out
+    - Handle error
+    - On Login allows create and edit post
+    - On Login disable create and edit post
+  - New Post auto fill author field (disabled for changes)
+  - [ ] Fix: Disable spinner when cancel google log-in
   - [ ] Filter post by author profile

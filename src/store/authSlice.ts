@@ -24,12 +24,13 @@ export const signIn = () => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(authStatus({ loading: true, error: '' }));
+      auth;
       const result = await signInWithPopup(auth, provider);
       const userLogged: UserType = {
         id: result.user.uid,
-        email: result.user.email,
+        email: result.user.email!,
         imgUrl: result.user.photoURL,
-        name: result.user.displayName,
+        name: result.user.displayName!,
       };
       dispatch(loadUser(userLogged));
       dispatch(authStatus({ loading: false, error: '' }));

@@ -11,7 +11,10 @@ type PostTypeAPI = {
     title: string;
     body: string;
     img: string;
-    author: string;
+    author: {
+      id: string;
+      name: string;
+    };
     date: string;
     categories: Categories[];
   };
@@ -22,7 +25,10 @@ type PostType = {
   title: string;
   body: string;
   img: string;
-  author: string;
+  author: {
+    id: string;
+    name: string;
+  };
   date: string;
   categories: Categories[];
 };
@@ -40,8 +46,8 @@ type PostsState = {
 
 type UserType = {
   id: string;
-  name: string | null;
-  email: string | null;
+  name: string;
+  email: string;
   imgUrl: string | null;
 };
 

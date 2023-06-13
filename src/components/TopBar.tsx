@@ -20,20 +20,24 @@ const TopBar = () => {
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(
           loadUser({
             id: user.uid,
-            email: user.email,
+            email: user.email!,
             imgUrl: user.photoURL,
-            name: user.displayName,
+            name: user.displayName!,
           })
         );
       } else {
         dispatch(loadUser(undefined));
       }
     });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const signinHandler = () => {

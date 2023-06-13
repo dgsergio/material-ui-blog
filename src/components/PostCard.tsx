@@ -22,7 +22,7 @@ const PostCard = ({ post }: { post: PostType }) => {
           fontStyle={'italic'}
           color="text.secondary"
         >
-          {post.author} ({post.date})
+          {post.author.name} ({post.date})
         </Typography>
         <Typography gutterBottom variant="h5" component="div">
           {post.title}

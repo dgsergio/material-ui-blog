@@ -274,3 +274,17 @@ a.footer-home {
   display: flex;
   gap: 1rem;
 }
+
+/********** sign-in **********/
+.signin {
+  align-items: center;
+  max-width: 25rem;
+  text-align: center;
+  margin: 4rem auto 8rem;
+}
+
+.signin h2,
+.signin p,
+.signin-google {
+  margin: 1rem auto;
+}

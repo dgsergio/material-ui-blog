@@ -13,6 +13,7 @@ import Root from './pages/Root';
 import Editor from './pages/Editor';
 import Home from './pages/Home';
 import ErrorPage from './pages/Error';
+import Private from './pages/Private';
 
 const router = createBrowserRouter([
   {
@@ -29,16 +30,22 @@ const router = createBrowserRouter([
         element: <Post />,
       },
       {
-        path: 'editor',
-        element: <Editor />,
-      },
-      {
-        path: 'editor/:postId',
-        element: <Editor />,
-      },
-      {
         path: 'category/:categoryId',
         element: <Home />,
+      },
+      {
+        path: 'editor',
+        element: <Private />,
+        children: [
+          {
+            index: true,
+            element: <Editor />,
+          },
+          {
+            path: ':postId',
+            element: <Editor />,
+          },
+        ],
       },
     ],
   },

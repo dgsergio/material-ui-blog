@@ -57,6 +57,9 @@ const Editor = () => {
   const posts = useSelector(
     (state: { posts: PostsState }) => state.posts.posts
   );
+  const userState = useSelector(
+    (state: { auth: { user: UserType } }) => state.auth.user
+  );
   const post = posts.find((post) => post.id === postId);
 
   useEffect(() => {
@@ -79,13 +82,15 @@ const Editor = () => {
       body: e.currentTarget.body.value,
       img: e.currentTarget.imageUrl.value,
       date: post?.date || `${postDate[1]} ${postDate[2]}, ${postDate[3]}`,
-      author: e.currentTarget.author.value,
+      author: post?.author || {
+        id: userState.id,
+        name: userState.name,
+      },
       categories: e.currentTarget.selectMultipleCategories.value.split(','),
     };
     if (
       postSelected.img.length < 1 ||
       postSelected.title.length < 1 ||
-      postSelected.author.length < 1 ||
       postSelected.body.length < 1 ||
       e.currentTarget.selectMultipleCategories.value.length < 1
     )
@@ -118,14 +123,6 @@ const Editor = () => {
           required
         />
         <TextField
-          fullWidth
-          id="author"
-          label="Author"
-          variant="standard"
-          defaultValue={post?.author}
-          required
-        />
-        <TextField
           defaultValue={post?.img}
           fullWidth
           required
@@ -149,6 +146,14 @@ const Editor = () => {
           multiline
           rows={8}
           required
+        />
+        <TextField
+          fullWidth
+          id="author"
+          label="Author"
+          variant="standard"
+          value={post?.author.name || userState?.name}
+          disabled
         />
         {errorMsg && <div className="message error">{errorMsg}</div>}
         <div className="form-footer">

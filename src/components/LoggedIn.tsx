@@ -37,7 +37,6 @@ const LoggedIn = ({
     setAnchorEl(null);
     dispatch(logOut());
   };
-
   return (
     <>
       <Box
