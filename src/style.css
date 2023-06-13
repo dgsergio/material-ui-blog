@@ -288,3 +288,26 @@ a.footer-home {
 .signin-google {
   margin: 1rem auto;
 }
+
+/********** profile **********/
+.profile {
+  flex-direction: row;
+  column-gap: 1.2rem;
+  align-items: center;
+  margin: 2rem auto;
+  padding: 1rem 0;
+  border-radius: 0.5rem;
+  background-color: #eee;
+}
+
+.profile-image {
+  border-radius: 0.4rem;
+}
+
+.profile-info button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.3rem 0;
+  font-weight: 600;
+}

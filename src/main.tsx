@@ -14,6 +14,7 @@ import Editor from './pages/Editor';
 import Home from './pages/Home';
 import ErrorPage from './pages/Error';
 import Private from './pages/Private';
+import { Profile } from './pages/Profile';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,16 @@ const router = createBrowserRouter([
       {
         path: 'category/:categoryId',
         element: <Home />,
+      },
+      {
+        path: 'profile',
+        element: <Private />,
+        children: [
+          {
+            index: true,
+            element: <Profile />,
+          },
+        ],
       },
       {
         path: 'editor',

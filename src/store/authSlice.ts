@@ -34,11 +34,12 @@ export const signIn = () => {
       };
       dispatch(loadUser(userLogged));
       dispatch(authStatus({ loading: false, error: '' }));
-    } catch (err) {
-      console.log(err);
-      dispatch(
-        authStatus({ loading: false, error: 'Fail to sign in: ' + err })
-      );
+    } catch (err: any) {
+      if (err.code) dispatch(authStatus({ loading: false, error: '' }));
+      else
+        dispatch(
+          authStatus({ loading: false, error: 'Fail to sign in: ' + err })
+        );
     }
   };
 };

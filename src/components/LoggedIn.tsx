@@ -6,10 +6,14 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
+import HomeIcon from '@mui/icons-material/Home';
 import { AppDispatch } from '../store';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../store/authSlice';
+import { Divider } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 type PropsLoggedIn = {
   userState: UserType;
@@ -25,6 +29,7 @@ const LoggedIn = ({
   open,
 }: PropsLoggedIn) => {
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -33,10 +38,12 @@ const LoggedIn = ({
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const loggoutHandler = () => {
     setAnchorEl(null);
     dispatch(logOut());
   };
+
   return (
     <>
       <Box
@@ -103,6 +110,19 @@ const LoggedIn = ({
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
+        <MenuItem onClick={() => navigate('/')}>
+          <ListItemIcon>
+            <HomeIcon fontSize="small" />
+          </ListItemIcon>
+          Home
+        </MenuItem>
+        <MenuItem onClick={() => navigate('/profile')}>
+          <ListItemIcon>
+            <AccountCircleIcon fontSize="small" />
+          </ListItemIcon>
+          Profile
+        </MenuItem>
+        <Divider />
         <MenuItem onClick={loggoutHandler}>
           <ListItemIcon>
             <LogoutIcon fontSize="small" />

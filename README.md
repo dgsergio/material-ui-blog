@@ -21,7 +21,7 @@
 - Fix post page img UI
 - Fix responsive UI
 - Add author and date
-- [ ] Add user authentication
+- Add user authentication
   - Set firebase.ts configuration
   - Sign up
     - Handle error
@@ -29,6 +29,9 @@
     - Handle error
     - On Login allows create and edit post
     - On Login disable create and edit post
-  - New Post auto fill author field (disabled for changes)
-  - [ ] Fix: Disable spinner when cancel google log-in
-  - [ ] Filter post by author profile
+  - [x] New Post auto fill author field (disabled for changes)
+  - [x] Fix: Disable spinner when cancel google log-in
+  - [x] Filter post by author profile
+  - [ ] Only post that user created could edit
+  - [ ] Only post that user created could delete
+  - [ ] Me super Admin for edit and delete any post

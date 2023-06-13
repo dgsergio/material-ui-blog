@@ -30,8 +30,10 @@ const postsSlice = createSlice({
       if (action.payload === '') {
         state.searchedPosts = undefined;
       } else {
-        state.searchedPosts = state.posts.filter((post) =>
-          post.title.toLowerCase().includes(action.payload)
+        state.searchedPosts = state.posts.filter(
+          (post) =>
+            post.title.toLowerCase().includes(action.payload) ||
+            post.author.name.toLowerCase().includes(action.payload)
         );
       }
     },
