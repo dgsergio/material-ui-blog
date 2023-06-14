@@ -19,6 +19,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../store';
 import { sendPost } from '../store/postsSlice';
+import AlertInfo from '../components/AlertInfo';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -105,114 +106,129 @@ const Editor = () => {
     }
   };
 
-  return (
-    <Container maxWidth="sm">
-      <Box
-        className="editor-form"
-        onSubmit={submitHandler}
-        component="form"
-        noValidate
-        autoComplete="off"
-      >
-        <TextField
-          fullWidth
-          id="titlePost"
-          label="Title"
-          variant="standard"
-          defaultValue={post?.title}
-          required
-        />
-        <TextField
-          defaultValue={post?.img}
-          fullWidth
-          required
-          id="imageUrl"
-          label="Image URL"
-          helperText="Provide a valid HTTP URL address of an image."
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <ImageIcon />
-              </InputAdornment>
-            ),
-          }}
-          variant="standard"
-        />
-        <TextField
-          defaultValue={post?.body}
-          fullWidth
-          id="body"
-          label="Body"
-          multiline
-          rows={8}
-          required
-        />
-        <TextField
-          fullWidth
-          id="author"
-          label="Author"
-          variant="standard"
-          value={post?.author.name || userState?.name}
-          disabled
-        />
-        {errorMsg && <div className="message error">{errorMsg}</div>}
-        <div className="form-footer">
-          <FormControl sx={{ width: 240 }}>
-            <InputLabel id="multipleCategorieslabel">Chip *</InputLabel>
-            <Select
-              fullWidth
-              required
-              labelId="multipleCategorieslabel"
-              id="multipleCategories"
-              multiple
-              value={personName}
-              onChange={handleChange}
-              input={
-                <OutlinedInput id="selectMultipleCategories" label="Chip" />
-              }
-              renderValue={(selected) => (
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                  {selected.map((value) => (
-                    <Chip key={value} label={value} />
-                  ))}
-                </Box>
-              )}
-              defaultValue={post?.categories}
-              MenuProps={MenuProps}
-            >
-              {names.map((name) => (
-                <MenuItem
-                  key={name}
-                  value={name}
-                  style={getStyles(name, personName, theme)}
-                >
-                  {name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <div className="form-footer-buttons">
-            <Button
-              variant="outlined"
-              type="button"
-              size="large"
-              onClick={() => navigate('/')}
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="contained"
-              type="submit"
-              size="large"
-              endIcon={<SendIcon />}
-            >
-              Submit
-            </Button>
+  // if (post && post.author.id !== userState.id) {
+  if (
+    userState.id !== import.meta.env.VITE_ADMIN_ID &&
+    post &&
+    post.author.id !== userState.id
+  ) {
+    return (
+      <AlertInfo
+        message="You do not have access to edit this post"
+        type="error"
+        title="Access denied"
+      />
+    );
+  } else {
+    return (
+      <Container maxWidth="sm">
+        <Box
+          className="editor-form"
+          onSubmit={submitHandler}
+          component="form"
+          noValidate
+          autoComplete="off"
+        >
+          <TextField
+            fullWidth
+            id="titlePost"
+            label="Title"
+            variant="standard"
+            defaultValue={post?.title}
+            required
+          />
+          <TextField
+            defaultValue={post?.img}
+            fullWidth
+            required
+            id="imageUrl"
+            label="Image URL"
+            helperText="Provide a valid HTTP URL address of an image."
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <ImageIcon />
+                </InputAdornment>
+              ),
+            }}
+            variant="standard"
+          />
+          <TextField
+            defaultValue={post?.body}
+            fullWidth
+            id="body"
+            label="Body"
+            multiline
+            rows={8}
+            required
+          />
+          <TextField
+            fullWidth
+            id="author"
+            label="Author"
+            variant="standard"
+            value={post?.author.name || userState?.name}
+            disabled
+          />
+          {errorMsg && <div className="message error">{errorMsg}</div>}
+          <div className="form-footer">
+            <FormControl sx={{ width: 240 }}>
+              <InputLabel id="multipleCategorieslabel">Chip *</InputLabel>
+              <Select
+                fullWidth
+                required
+                labelId="multipleCategorieslabel"
+                id="multipleCategories"
+                multiple
+                value={personName}
+                onChange={handleChange}
+                input={
+                  <OutlinedInput id="selectMultipleCategories" label="Chip" />
+                }
+                renderValue={(selected) => (
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                    {selected.map((value) => (
+                      <Chip key={value} label={value} />
+                    ))}
+                  </Box>
+                )}
+                defaultValue={post?.categories}
+                MenuProps={MenuProps}
+              >
+                {names.map((name) => (
+                  <MenuItem
+                    key={name}
+                    value={name}
+                    style={getStyles(name, personName, theme)}
+                  >
+                    {name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <div className="form-footer-buttons">
+              <Button
+                variant="outlined"
+                type="button"
+                size="large"
+                onClick={() => navigate('/')}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="contained"
+                type="submit"
+                size="large"
+                endIcon={<SendIcon />}
+              >
+                Submit
+              </Button>
+            </div>
           </div>
-        </div>
-      </Box>
-    </Container>
-  );
+        </Box>
+      </Container>
+    );
+  }
 };
 
 export default Editor;

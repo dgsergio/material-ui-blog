@@ -289,22 +289,33 @@ a.footer-home {
   margin: 1rem auto;
 }
 
+.alertinfo {
+  max-width: 500px;
+  margin: 5rem auto;
+}
+
 /********** profile **********/
 .profile {
-  flex-direction: row;
-  column-gap: 1.2rem;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
   margin: 2rem auto;
-  padding: 1rem 0;
+  padding: 1.3rem;
   border-radius: 0.5rem;
   background-color: #eee;
 }
 
-.profile-image {
+.profile-content {
+  display: flex;
+  flex-direction: row;
+  column-gap: 1.2rem;
+  align-items: center;
+}
+
+.profile-content-image {
   border-radius: 0.4rem;
 }
 
-.profile-info button {
+.profile-content-info button {
   background: none;
   border: none;
   cursor: pointer;

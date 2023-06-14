@@ -29,9 +29,11 @@
     - Handle error
     - On Login allows create and edit post
     - On Login disable create and edit post
-  - [x] New Post auto fill author field (disabled for changes)
-  - [x] Fix: Disable spinner when cancel google log-in
-  - [x] Filter post by author profile
-  - [ ] Only post that user created could edit
-  - [ ] Only post that user created could delete
-  - [ ] Me super Admin for edit and delete any post
+  - New Post auto fill author field (disabled for changes)
+  - Fix: Disable spinner when cancel google log-in
+  - Filter post by author profile
+  - [x] Only post that user created could edit
+  - [x] Only post that user created could delete
+  - [x] Me super Admin for edit and delete any post
+  - [x] Add top right close X to profile to went back to homepage
+  - [ ] Add aos

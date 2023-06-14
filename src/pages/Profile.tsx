@@ -1,11 +1,14 @@
-import { Container, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
+import { Container, IconButton, Typography } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { AppDispatch } from '../store';
 import { logOut } from '../store/authSlice';
 import PostsList from '../components/PostsList';
+import { useNavigate } from 'react-router-dom';
 
 export const Profile = () => {
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
 
   const posts = useSelector(
     (state: { posts: { posts: PostType[] } }) => state.posts.posts
@@ -17,18 +20,23 @@ export const Profile = () => {
   return (
     <>
       <Container maxWidth="lg" className="profile" sx={{ display: 'flex' }}>
-        <img
-          className="profile-image"
-          src={userState!.imgUrl || '/img/no-img.gif'}
-          alt={'profile picture'}
-        />
-        <div className="profile-info">
-          <Typography variant="h6" component="h2">
-            {userState!.name}
-          </Typography>
-          <Typography component="p">{userState!.email}</Typography>
-          <button onClick={() => dispatch(logOut())}>( Log-out )</button>
+        <div className="profile-content">
+          <img
+            className="profile-content-image"
+            src={userState!.imgUrl || '/img/no-img.gif'}
+            alt={'profile picture'}
+          />
+          <div className="profile-content-info">
+            <Typography variant="h6" component="h2">
+              {userState!.name}
+            </Typography>
+            <Typography component="p">{userState!.email}</Typography>
+            <button onClick={() => dispatch(logOut())}>( Log-out )</button>
+          </div>
         </div>
+        <IconButton color="primary" onClick={() => navigate('/')}>
+          <CloseIcon fontSize="small" />
+        </IconButton>
       </Container>
       {userPosts.length > 0 && (
         <>

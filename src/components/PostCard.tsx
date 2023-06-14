@@ -5,6 +5,10 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+AOS.init();
 
 const PostCard = ({ post }: { post: PostType }) => {
   const shortenBody: string =
@@ -13,7 +17,12 @@ const PostCard = ({ post }: { post: PostType }) => {
       : post.body.split(' ', 20).join(' ') + '...';
 
   return (
-    <Card className="card">
+    <Card
+      className="card"
+      data-aos="fade-up"
+      data-aos-delay="100"
+      data-aos-once="true"
+    >
       <CardMedia sx={{ height: 140 }} image={post.img} title={post.title} />
       <CardContent>
         <Typography

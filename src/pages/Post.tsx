@@ -64,22 +64,28 @@ const Post = () => {
                     <Button size="small">
                       <Link to="/">&#x21D0; Back</Link>
                     </Button>
-                    {userState && (
-                      <IconButton
-                        aria-label="delete"
-                        size="large"
-                        color="secondary"
-                        onClick={deleteHandler}
-                      >
-                        <DeleteIcon fontSize="inherit" />
-                      </IconButton>
-                    )}
+                    {userState &&
+                      (userState.id === post.author.id ||
+                        userState.id === import.meta.env.VITE_ADMIN_ID) && (
+                        <IconButton
+                          aria-label="delete"
+                          size="large"
+                          color="secondary"
+                          onClick={deleteHandler}
+                        >
+                          <DeleteIcon fontSize="inherit" />
+                        </IconButton>
+                      )}
                   </div>
                 </footer>
               </div>
             </div>
           </article>
-          {userState && <EditorIcon add={false} id={post.id} />}
+          {userState &&
+            (userState.id === post.author.id ||
+              userState.id === import.meta.env.VITE_ADMIN_ID) && (
+              <EditorIcon add={false} id={post.id} />
+            )}
         </>
       )}
     </>
