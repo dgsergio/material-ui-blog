@@ -32,8 +32,10 @@
   - New Post auto fill author field (disabled for changes)
   - Fix: Disable spinner when cancel google log-in
   - Filter post by author profile
-  - [x] Only post that user created could edit
-  - [x] Only post that user created could delete
-  - [x] Me super Admin for edit and delete any post
-  - [x] Add top right close X to profile to went back to homepage
-  - [ ] Add aos
+  - Only post that user created could edit
+  - Only post that user created could delete
+  - Me super Admin for edit and delete any post
+  - Add top right close X to profile to went back to homepage
+  - Add aos
+
+See the website in action: https://blog-c0db2.web.app/

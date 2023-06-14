@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../store';
 import { getPosts } from '../store/postsSlice';
-let firstTime = true;
 
 function Root() {
   const dispatch: AppDispatch = useDispatch();
@@ -27,10 +26,6 @@ function Root() {
   };
 
   useEffect(() => {
-    if (firstTime) {
-      firstTime = false;
-      return;
-    }
     dispatch(getPosts(transformData));
   }, []);
 
