@@ -5,7 +5,7 @@ This is a Blog applicaction that allows users to create and manage their owns po
 You can visit the website at the following link:
 https://blog-c0db2.web.app/
 
-## Introduction
+## About this app
 
 This application was built using [ReactJs](https://react.dev/) and TypeScript. [React Router](https://reactrouter.com/) was utilized as a dependency for managing routing, and [Redux Toolkit](https://redux-toolkit.js.org/) for efficient state management across the application.
 
