@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Alert from '@mui/joy/Alert';
 import { Container, Typography } from '@mui/material';
 import { auth } from '../firebase';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, User } from 'firebase/auth';
 import LoggedOut from './LoggedOut';
 import LoggedIn from './LoggedIn';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,17 +19,22 @@ const TopBar = () => {
   const open = Boolean(anchorEl);
   const dispatch: AppDispatch = useDispatch();
 
+  const userDispatcher = async (user: User) => {
+    dispatch(
+      loadUser({
+        id: user.uid,
+        email: user.email!,
+        imgUrl: user.photoURL,
+        name: user.displayName!,
+        accessToken: await user.getIdToken(),
+      })
+    );
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        dispatch(
-          loadUser({
-            id: user.uid,
-            email: user.email!,
-            imgUrl: user.photoURL,
-            name: user.displayName!,
-          })
-        );
+        userDispatcher(user);
       } else {
         dispatch(loadUser(undefined));
       }

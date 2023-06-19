@@ -68,19 +68,25 @@ export const getPosts = (
   };
 };
 
-export const sendPost = (post: PostType, reqMethod: 'POST' | 'PATCH') => {
+export const sendPost = (
+  post: PostType,
+  req: { method: 'POST' | 'PATCH'; accessToken: string }
+) => {
   return async (dispatch: Dispatch) => {
     const { id, ...postNoId } = post;
     const endURL = id === '' ? 'posts.json' : `posts/${id}.json`;
     try {
       dispatch(changeStatus({ loading: true, error: '' }));
-      const response = await fetch(import.meta.env.VITE_FIREBASE_URL + endURL, {
-        method: reqMethod,
-        body: JSON.stringify(postNoId),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_FIREBASE_URL}${endURL}?auth=${req.accessToken}`,
+        {
+          method: req.method,
+          body: JSON.stringify(postNoId),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
       if (!response.ok) throw new Error('Something went wrong');
       const data = await response.json();
       if (!id) dispatch(addPost({ id: data.name, ...postNoId }));
@@ -97,12 +103,13 @@ export const sendPost = (post: PostType, reqMethod: 'POST' | 'PATCH') => {
   };
 };
 
-export const deletePost = (id: string) => {
+export const deletePost = (id: string, accessToken: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(changeStatus({ loading: true, error: '' }));
       const response = await fetch(
-        import.meta.env.VITE_FIREBASE_URL + `posts/${id}.json`,
+        import.meta.env.VITE_FIREBASE_URL +
+          `posts/${id}.json?auth=${accessToken}`,
         {
           method: 'DELETE',
         }

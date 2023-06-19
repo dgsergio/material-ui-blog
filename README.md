@@ -19,6 +19,7 @@ The application is fully responsive.
 
 ## Technologies used:
 
+- Vite
 - React JS
 - Typescript
 - React Router
@@ -33,7 +34,7 @@ The application is fully responsive.
 - Dummy posts: https://dummyjson.com/posts
 - On click search area backspace button clear the input field (controlled value with useState)
 - Connect to a database
-  - Hnadle Error
+  - Handle Error
   - Create
   - R
   - U
@@ -59,5 +60,6 @@ The application is fully responsive.
   - Add top right close X to profile to went back to homepage
   - Add aos
 
+- [ ] confirm on delete
 - [ ] redireccionamientos en firebase hosting
 - [ ] make same tests

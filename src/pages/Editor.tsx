@@ -98,9 +98,19 @@ const Editor = () => {
       setErrorMsg('All field are required');
     else {
       if (postId) {
-        dispatch(sendPost(postSelected, 'PATCH'));
+        dispatch(
+          sendPost(postSelected, {
+            method: 'PATCH',
+            accessToken: userState.accessToken,
+          })
+        );
       } else {
-        dispatch(sendPost(postSelected, 'POST'));
+        dispatch(
+          sendPost(postSelected, {
+            method: 'POST',
+            accessToken: userState.accessToken,
+          })
+        );
       }
       navigate('/');
     }

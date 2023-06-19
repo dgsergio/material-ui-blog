@@ -49,6 +49,7 @@ type UserType = {
   name: string;
   email: string;
   imgUrl: string | null;
+  accessToken: string;
 };
 
 type AuthState = {

@@ -31,6 +31,7 @@ export const signIn = () => {
         email: result.user.email!,
         imgUrl: result.user.photoURL,
         name: result.user.displayName!,
+        accessToken: await result.user.getIdToken(),
       };
       dispatch(loadUser(userLogged));
       dispatch(authStatus({ loading: false, error: '' }));

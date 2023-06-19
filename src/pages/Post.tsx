@@ -1,11 +1,8 @@
 import { Button, Divider, Typography } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
 import EditorIcon from '../components/EditorIcon';
-import { AppDispatch } from '../store';
-import { deletePost } from '../store/postsSlice';
+import DeleteConfirmation from '../components/DeleteConfirmation';
 
 const Post = () => {
   const { postId } = useParams();
@@ -16,13 +13,6 @@ const Post = () => {
     (state: { posts: PostsState }) => state.posts.posts
   );
   const post = posts.find((post) => post.id === postId);
-  const dispatch: AppDispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const deleteHandler = () => {
-    dispatch(deletePost(post!.id));
-    navigate('/');
-  };
 
   return (
     <>
@@ -67,14 +57,7 @@ const Post = () => {
                     {userState &&
                       (userState.id === post.author.id ||
                         userState.id === import.meta.env.VITE_ADMIN_ID) && (
-                        <IconButton
-                          aria-label="delete"
-                          size="large"
-                          color="secondary"
-                          onClick={deleteHandler}
-                        >
-                          <DeleteIcon fontSize="inherit" />
-                        </IconButton>
+                        <DeleteConfirmation id={post.id} />
                       )}
                   </div>
                 </footer>
